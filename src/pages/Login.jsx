@@ -22,6 +22,12 @@ export default function Login() {
       
       const { user, token } = response.data; 
       
+      // Save flags and the token locally so Render's cross-site cookie restriction is completely bypassed
+      localStorage.setItem('isLoggedIn', 'true');
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+      
       login(user, token); 
       
       setMessage('🎉 Login successful! Redirecting...');
@@ -30,8 +36,6 @@ export default function Login() {
       setMessage(err.response?.data?.message || '❌ Invalid email or password.');
     }
   };
-
-  
 
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', fontFamily: 'sans-serif' }}>
