@@ -14,22 +14,19 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
+  e.preventDefault();
+  setError('');
+  try {
+    await API.post('/api/auth/login', { email, password });
     
-    try {
-      const response = await API.post('/api/auth/login', formData);
-      
-      const { user, token } = response.data; 
-      
-      login(user, token); 
-      
-      setMessage('🎉 Login successful! Redirecting...');
-      setTimeout(() => navigate('/'), 1500);
-    } catch (err) {
-      setMessage(err.response?.data?.message || '❌ Invalid email or password.');
-    }
-  };
+    // 🚀 Add this line right here:
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    navigate('/');
+  } catch (err) {
+    setError(err.response?.data?.message || 'Invalid email or password.');
+  }
+};
 
   
 
