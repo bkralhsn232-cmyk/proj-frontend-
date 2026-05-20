@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
 
   // Login handler helper
   const login = (userData, token) => {
+    localStorage.setItem('isLoggedIn', 'true'); // 🚀 Syncs with ProtectedRoute
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
@@ -27,6 +28,7 @@ export function AuthProvider({ children }) {
 
   // Logout handler helper
   const logout = () => {
+    localStorage.removeItem('isLoggedIn'); // 🚀 Clears out the route guard flag
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
