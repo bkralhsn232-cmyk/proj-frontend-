@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AddMovie from './components/addMovie'; 
+import Forum from './pages/Forum.jsx';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/add-movie" element={<AddMovie />} /> 
+          <Route path="/forum/:movieId" element={<Forum />} />
         </Routes>
       </main>
     </div>
