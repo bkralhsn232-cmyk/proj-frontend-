@@ -19,7 +19,7 @@ API.interceptors.request.use(
 );
 
 export const deleteMovie = async (movieId) => {
-  const response = await API.delete(`/movies/${movieId}`);
+  const response = await API.delete(`/api/movies/${movieId}`);
   return response.data;
 };
 
