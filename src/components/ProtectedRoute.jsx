@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import API from '../api/axios';
 
 export default function ProtectedRoute() {
+  // 🚀 Checks both the boolean login flag AND verifies that a token exists in local memory
+  const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true' || !!localStorage.getItem('token');
 
-
-  const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true';
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
-}
-
-  if (isAuthenticated === null) {
-    return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>🎬 Checking authorization...</h2>;
+  // If the user isn't authenticated at all, instantly boot them to the login screen
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+  // If they are verified, seamlessly unlock and render the nested child pages (Catalog, Add Movie, etc.)
+  return <Outlet />;
+}
