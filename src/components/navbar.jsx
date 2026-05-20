@@ -26,7 +26,7 @@ export default function Navbar() {
         
         {user ? (
           <>
-             <Link to="/add-Movie" style={{ color: '#fff', textDecoration: 'none' }}>
+             <Link to="/add-movie" style={{ color: '#fff', textDecoration: 'none' }}>
           ➕ Add Movie
         </Link>
 
