@@ -26,9 +26,10 @@ export default function Navbar() {
         
         {user ? (
           <>
-             <Link to="/add-movie" style={{ color: '#fff', textDecoration: 'none' }}>
-          ➕ Add Movie
-        </Link>
+            {/* 🚀 FIXED: Changed "/add-Movie" to entirely lowercase "/add-movie" */}
+            <Link to="/add-movie" style={{ color: '#fff', textDecoration: 'none' }}>
+              ➕ Add Movie
+            </Link>
 
             <span style={{ color: '#cbd5e0' }}>Welcome, <strong>{user.username}</strong></span>
             <button 
