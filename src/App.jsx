@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar'; // 🚀 Ensure this matches your file case exactly
+import Navbar from './components/navbar'; 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import AddMovie from './components/addMovie'; // 🚀 Double check if 'addMovie' is lowercase or uppercase in your folder!
+import AddMovie from './components/addMovie'; 
 
 function App() {
   return (
     <div>
-      <navbar />
+      <Navbar />
 
       <main style={{ padding: '20px' }}>
         <Routes>
