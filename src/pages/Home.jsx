@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import API from '../api/axios';
 
 export default function Home() {
@@ -218,17 +219,19 @@ export default function Home() {
 
                     {movie.imageUrl && (
                       <div style={{ marginTop: '15px', width: '100%', textAlign: 'center' }}>
-                        <img 
-                          src={movie.imageUrl} 
-                          alt={`${movie.title} poster`} 
-                          style={{ 
-                            width: '100%', 
-                            maxHeight: '320px', 
-                            objectFit: 'contain', 
-                            borderRadius: '6px',
-                            backgroundColor: '#f7fafc'
-                          }} 
-                        />
+                        <Link to={`/forum/${movie._id}`} style={{ display: 'inline-block', width: '100%', cursor: 'pointer' }}>
+                          <img 
+                            src={movie.imageUrl} 
+                            alt={`${movie.title} poster`} 
+                            style={{ 
+                              width: '100%', 
+                              maxHeight: '320px', 
+                              objectFit: 'contain', 
+                              borderRadius: '6px',
+                              backgroundColor: '#f7fafc'
+                            }} 
+                          />
+                        </Link>
                       </div>
                     )}
 
