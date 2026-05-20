@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AddMovie from './components/addMovie'; 
-import Forum from './pages/Forum.jsx';
+import Forum from './pages/forum.jsx';
 
 function App() {
   return (
