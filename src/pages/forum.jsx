@@ -3,18 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Forum = () => {
-  const { movieId } = useParams(); // Grabs the ID from the URL path automatically
+  const { movieId } = useParams(); 
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Fallbacks—adjust these depending on how your app stores auth details locally
   const currentUsername = localStorage.getItem('username') || 'Anonymous'; 
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`https://proj-vpn5.onrender.com/api/comments/${movieId}`);
+        const response = await axios.get(
+          `https://proj-vpn5.onrender.com/api/comments/${movieId}`,
+          { withCredentials: true }
+        );
         setComments(response.data);
       } catch (err) {
         console.error("Error fetching discussion history:", err);
@@ -33,9 +35,9 @@ const Forum = () => {
       const response = await axios.post(
         `https://proj-vpn5.onrender.com/api/comments/${movieId}`,
         { text: newComment, username: currentUsername },
-        { withCredentials: true } // Keeps your session cookies linked perfectly
+        { withCredentials: true }
       );
-      setComments([response.data, ...comments]); // Instantly push the new message to the top of the feed
+      setComments([response.data, ...comments]); 
       setNewComment('');
     } catch (err) {
       alert("You must be logged in to post in the forum.");
