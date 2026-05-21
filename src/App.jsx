@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar'; // 🚀 FIXED: Changed 'Navbar' back to lowercase 'navbar'
+import Navbar from './components/navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -8,9 +8,9 @@ import Forum from './pages/forum.jsx';
 
 function App() {
   return (
-    <div>
+    <div id="app-container">
       <Navbar />
-      <main style={{ padding: '20px' }}>
+      <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
