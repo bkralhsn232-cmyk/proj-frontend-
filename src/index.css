@@ -7,17 +7,10 @@
   --accent: #00ff7f;
   --accent-bg: rgba(0, 255, 127, 0.1);
   --accent-border: rgba(0, 255, 127, 0.3);
-  --shadow: rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
 
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --mono: ui-monospace, Consolas, 'Cascadia Code', monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  --sans: 'Inter', system-ui, sans-serif;
 }
 
-/* Global Reset: Force dark background everywhere */
 html, body, #root, #app-container {
   margin: 0;
   padding: 0;
@@ -25,9 +18,7 @@ html, body, #root, #app-container {
   width: 100%;
   background-color: var(--bg) !important;
   color: var(--text) !important;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--sans);
 }
 
 #root {
@@ -36,50 +27,16 @@ html, body, #root, #app-container {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   border-inline: 1px solid var(--border);
 }
 
-h1, h2, h3 {
-  font-family: var(--heading);
-  font-weight: 600;
-  color: var(--text-h);
-}
+h1, h2, h3 { color: var(--text-h); }
 
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 20px 32px;
   border-bottom: 1px solid var(--border);
-  background-color: var(--bg);
-}
-
-.nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: var(--accent);
-}
-
-input, textarea, select {
-  background-color: var(--code-bg);
-  border: 1px solid var(--border);
-  color: var(--text-h);
-  padding: 12px;
-  border-radius: 6px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-input:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
 .btn-primary {
@@ -90,9 +47,4 @@ input:focus {
   padding: 10px 20px;
   font-weight: 700;
   cursor: pointer;
-}
-
-.main-content {
-  padding: 20px;
-  flex: 1;
 }
