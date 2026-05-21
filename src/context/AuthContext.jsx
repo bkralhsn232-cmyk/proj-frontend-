@@ -1,13 +1,11 @@
 import { createContext, useState, useEffect } from 'react';
 
-// Create the context hub
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if the user is already logged in when the app first loads
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -18,19 +16,29 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  // Login handler helper
   const login = (userData, token) => {
-    localStorage.setItem('isLoggedIn', 'true'); // 🚀 Syncs with ProtectedRoute
+    localStorage.setItem('isLoggedIn', 'true'); 
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(userData));
+    
+    if (userData) {
+      localStorage.setItem('role', userData.role || 'user');
+      localStorage.setItem('username', userData.username || 'Anonymous');
+      localStorage.setItem('userId', userData._id || userData.id || '');
+    }
+    
     setUser(userData);
   };
 
-  // Logout handler helper
   const logout = () => {
-    localStorage.removeItem('isLoggedIn'); // 🚀 Clears out the route guard flag
+    localStorage.removeItem('isLoggedIn'); 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    
+    localStorage.removeItem('role');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    
     setUser(null);
   };
 
