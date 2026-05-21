@@ -9,6 +9,8 @@ const Forum = () => {
   const [loading, setLoading] = useState(true);
 
   const currentUsername = localStorage.getItem('username') || 'Anonymous'; 
+  const currentUserRole = localStorage.getItem('role') || 'user'; 
+  const currentUserId = localStorage.getItem('userId') || ''; 
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -44,6 +46,20 @@ const Forum = () => {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    if (!window.confirm("Are you sure you want to delete this comment?")) return;
+
+    try {
+      await axios.delete(
+        `https://proj-vpn5.onrender.com/api/comments/${commentId}`,
+        { withCredentials: true }
+      );
+      setComments(comments.filter(c => c._id !== commentId));
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to delete comment.");
+    }
+  };
+
   if (loading) return <div style={{ padding: '20px', color: '#fff' }}>Loading forum discussion...</div>;
 
   return (
@@ -68,15 +84,37 @@ const Forum = () => {
         {comments.length === 0 ? (
           <p style={{ color: '#a0aec0' }}>No comments posted yet. Start the conversation!</p>
         ) : (
-          comments.map((comment) => (
-            <div key={comment._id} style={{ background: '#2d3748', padding: '15px', borderRadius: '6px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                <strong style={{ color: '#ed64a6' }}>@{comment.username}</strong>
-                <small style={{ color: '#a0aec0' }}>{new Date(comment.createdAt).toLocaleDateString()}</small>
+          comments.map((comment) => {
+            const canDelete = comment.userId === currentUserId || currentUserRole === 'admin';
+
+            return (
+              <div key={comment._id} style={{ background: '#2d3748', padding: '15px', borderRadius: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                  <strong style={{ color: '#ed64a6' }}>@{comment.username}</strong>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <small style={{ color: '#a0aec0' }}>{new Date(comment.createdAt).toLocaleDateString()}</small>
+                    {canDelete && (
+                      <button 
+                        onClick={() => handleDeleteComment(comment._id)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#e53e3e',
+                          cursor: 'pointer',
+                          fontSize: '13px',
+                          padding: '0 5px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        🗑️ Delete
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <p style={{ margin: 0, lineHeight: '1.5' }}>{comment.text}</p>
               </div>
-              <p style={{ margin: 0, lineHeight: '1.5' }}>{comment.text}</p>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>
