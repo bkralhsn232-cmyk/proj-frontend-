@@ -52,11 +52,11 @@ function Navbar() {
       </Link>
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link to="/" style={linkStyle}>الصفحة الرئيسية 🏠</Link>
-        <Link to="/about" style={linkStyle}>معلومات ℹ️</Link>
-        <Link to="/register" style={linkStyle}>إنشاء حساب 📝</Link>
-        <Link to="/login" style={linkStyle}>تسجيل الدخول 🔐</Link>
-        
+        <Link to="/" style={linkStyle}>Home 🏠</Link>
+        <Link to="/about" style={linkStyle}>About ℹ️</Link>
+        <Link to="/register" style={linkStyle}>Register 📝</Link>
+        <Link to="/login" style={linkStyle}>Login 🔐</Link>
+
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           style={{
