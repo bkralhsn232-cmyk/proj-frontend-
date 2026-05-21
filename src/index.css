@@ -1,50 +1,37 @@
-:root {
-  --text: #a0a0a0;
-  --text-h: #ffffff;
-  --bg: #121212;
-  --border: #2a2a2a;
-  --code-bg: #1a1a1a;
-  --accent: #00ff7f;
-  --accent-bg: rgba(0, 255, 127, 0.1);
-  --accent-border: rgba(0, 255, 127, 0.3);
-
-  --sans: 'Inter', system-ui, sans-serif;
-}
-
-html, body, #root, #app-container {
+/* 1. Global Reset to ensure zero white space */
+* {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--bg) !important;
-  color: var(--text) !important;
-  font-family: var(--sans);
+  box-sizing: border-box;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  border-inline: 1px solid var(--border);
+/* 2. Force the entire page to be Carbon Black */
+html, 
+body, 
+#root, 
+#app-container, 
+div, 
+main {
+  background-color: #121212 !important;
+  color: #a0a0a0 !important;
+  min-height: 100vh !important;
+  width: 100% !important;
 }
 
-h1, h2, h3 { color: var(--text-h); }
+/* 3. Ensure your text looks right */
+h1, h2, h3 {
+  color: #ffffff !important;
+}
 
+/* 4. Navbar Fix */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 32px;
-  border-bottom: 1px solid var(--border);
+  background-color: #121212 !important;
+  border-bottom: 1px solid #2a2a2a !important;
 }
 
-.btn-primary {
-  background-color: var(--accent);
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-weight: 700;
-  cursor: pointer;
+/* 5. Input Field Fix */
+input, textarea, select {
+  background-color: #1a1a1a !important;
+  border: 1px solid #2a2a2a !important;
+  color: #ffffff !important;
 }
