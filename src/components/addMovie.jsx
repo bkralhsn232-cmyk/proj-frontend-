@@ -32,7 +32,6 @@ const AddMovie = () => {
       const response = await API.post("./api/movies", formData); 
       
       setMessage(`Successfully added "${response.data.title}"!`);
-      // Clear form on success
       setFormData({
         title: "",
         genre: "",
