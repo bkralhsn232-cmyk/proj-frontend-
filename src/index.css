@@ -51,3 +51,15 @@ input:focus {
   border-color: var(--accent);
   outline: none;
 }
+CSS
+#app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+}
+
+.main-content {
+  flex: 1; /* This ensures the main area fills the available space */
+  padding: 20px;
+}
