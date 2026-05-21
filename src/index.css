@@ -19,7 +19,6 @@
   color-scheme: light dark;
 }
 
-/* Base styles using variables */
 body {
   margin: 0;
   background-color: var(--bg);
@@ -27,7 +26,6 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Dark mode variable overrides */
 body.dark-mode {
   --text: #9ca3af;
   --text-h: #f3f4f6;
@@ -41,7 +39,6 @@ body.dark-mode {
   --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 }
 
-/* This forces the backgrounds to update to the new variables */
 body.dark-mode,
 body.dark-mode #root,
 body.dark-mode .navbar,
@@ -67,14 +64,12 @@ body.dark-mode select {
   background-color: var(--bg);
 }
 
-/* Keep headings consistent */
 h1, h2, h3 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
 }
 
-/* Navbar and elements */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -83,6 +78,3 @@ h1, h2, h3 {
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
-
-/* All other styles remain the same... */
-/* [Ensure the rest of your CSS follows below] */
