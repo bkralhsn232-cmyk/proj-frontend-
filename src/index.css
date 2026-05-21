@@ -1,4 +1,11 @@
-/* 1. Global Reset to ensure zero white space */
+:root {
+  --bg: #121212;
+  --text: #a0a0a0;
+  --text-h: #ffffff;
+  --border: #2a2a2a;
+  --accent: #00ff7f;
+  --code-bg: #1a1a1a;
+}
 * {
   margin: 0;
   padding: 0;
