@@ -71,57 +71,46 @@ export default function Home() {
     return matchesSearch && matchesGenre;
   });
 
-  if (loading) return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>🎬 Loading movie catalog...</h2>;
-  if (error) return <p style={{ color: 'red', textAlign: 'center', marginTop: '50px' }}>{error}</p>;
+  if (loading) return <h2 style={{ textAlign: 'center', marginTop: '100px', color: 'var(--text-h)' }}>🎬 Loading movie catalog...</h2>;
+  if (error) return <div style={{ maxWidth: '500px', margin: '50px auto' }} className="alert-error">{error}</div>;
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', fontFamily: 'sans-serif' }}>
+    <div style={{ padding: '40px 24px', textAlign: 'left' }}>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1>🍿 Explore Movies</h1>
-        <span style={{ background: '#e0e0e0', padding: '5px 12px', borderRadius: '15px', fontSize: '14px', fontWeight: 'bold' }}>
-          Total Database Items: {movies.length}
+      {/* Dashboard Header Block */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ textAlign: 'left' }}>
+          <h1 style={{ margin: '0 0 4px 0', fontSize: '38px' }}>Explore Movies</h1>
+          <p style={{ color: 'var(--text)', fontSize: '15px' }}>Discover and discuss cinema uploads tracking through the community ecosystem.</p>
+        </div>
+        <span className="counter" style={{ background: 'var(--code-bg)', border: '1px solid var(--border)', padding: '6px 14px', fontSize: '14px', fontWeight: '600' }}>
+          Catalog Titles: {movies.length}
         </span>
       </div>
 
+      {/* Filter and Search Action Control Bar */}
       <div style={{ 
         display: 'flex', 
-        gap: '15px', 
-        marginBottom: '30px', 
-        background: '#f7fafc', 
-        padding: '15px', 
+        gap: '16px', 
+        marginBottom: '40px', 
+        background: 'var(--code-bg)', 
+        padding: '16px', 
         borderRadius: '8px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--border)',
         flexWrap: 'wrap'
       }}>
         <input 
           type="text"
-          placeholder="🔍 Search movies by title or description..."
+          placeholder="🔍 Search movies by title or synopsis text keywords..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            flex: '2',
-            minWidth: '250px',
-            padding: '10px 15px',
-            borderRadius: '6px',
-            border: '1px solid #cbd5e0',
-            fontSize: '15px'
-          }}
+          style={{ flex: '2', minWidth: '250px' }}
         />
 
         <select
           value={selectedGenre}
           onChange={(e) => setSelectedGenre(e.target.value)}
-          style={{
-            flex: '1',
-            minWidth: '150px',
-            padding: '10px',
-            borderRadius: '6px',
-            border: '1px solid #cbd5e0',
-            backgroundColor: '#fff',
-            fontSize: '15px',
-            cursor: 'pointer'
-          }}
+          style={{ flex: '1', minWidth: '160px' }}
         >
           <option value="">🎬 All Genres</option>
           {uniqueGenres.map((genre) => (
@@ -130,195 +119,110 @@ export default function Home() {
         </select>
       </div>
 
-      <hr style={{ border: '0', height: '1px', background: '#eee', marginBottom: '30px' }} />
-
+      {/* Empty State Conditions */}
       {movies.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '50px', background: '#f9f9f9', borderRadius: '8px', border: '1px dashed #ccc' }}>
-          <h3>Your movie database is empty!</h3>
-          <p style={{ color: '#666' }}>Go add a title to get started.</p>
+        <div style={{ textAlign: 'center', padding: '60px 20px', background: 'var(--code-bg)', borderRadius: '10px', border: '1px dashed var(--border)' }}>
+          <h3 style={{ color: 'var(--text-h)', marginBottom: '8px' }}>Your movie collection database is empty!</h3>
+          <p style={{ color: 'var(--text)', marginBottom: '20px', fontSize: '15px' }}>Be the first to contribute an entry to our shared tracking catalog index.</p>
+          <Link to="/add-movie" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>+ Add Custom Entry</Link>
         </div>
       ) : filteredMovies.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#718096' }}>
-          <h3>No records found matching your search filters.</h3>
+        <div style={{ textAlign: 'center', padding: '40px', background: 'var(--code-bg)', borderRadius: '10px', border: '1px solid var(--border)' }}>
+          <h3 style={{ color: 'var(--text-h)', marginBottom: '4px' }}>No records found matching your active queries.</h3>
+          <p style={{ color: 'var(--text)', marginBottom: '16px', fontSize: '14px' }}>Try tuning your keywords or resetting the dynamic dropdown picker filters.</p>
           <button 
             onClick={() => { setSearchTerm(''); setSelectedGenre(''); }}
-            style={{ marginTop: '10px', padding: '6px 12px', background: '#edf2f7', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            className="btn-primary"
+            style={{ padding: '8px 16px', fontSize: '13px' }}
           >
             Clear Filters
           </button>
         </div>
       ) : (
-        <div style={{ display: 'grid', gap: '25px', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+        /* The Responsive UI Grid Layer */
+        <div className="movie-grid" style={{ padding: '0', gap: '32px' }}>
           {filteredMovies.map((movie) => {
             const isEditing = editingId === movie._id;
 
             return (
-              <div 
-                key={movie._id} 
-                style={{ 
-                  border: '1px solid #e0e0e0', 
-                  padding: '20px', 
-                  borderRadius: '10px', 
-                  backgroundColor: '#fff',
-                  boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
+              <div key={movie._id} className="movie-card">
+                
                 {isEditing ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <input 
-                      type="text" 
-                      name="title" 
-                      value={editFormData.title || ''} 
-                      onChange={handleEditChange}
-                      style={{ padding: '6px', fontSize: '15px', fontWeight: 'bold', width: '100%', boxSizing: 'border-box' }}
-                    />
-                    <input 
-                      type="text" 
-                      name="genre" 
-                      value={editFormData.genre || ''} 
-                      onChange={handleEditChange}
-                      placeholder="Genre"
-                      style={{ padding: '6px', fontSize: '13px', width: '100%', boxSizing: 'border-box' }}
-                    />
-                    <input 
-                      type="text" 
-                      name="imageUrl" 
-                      value={editFormData.imageUrl || ''} 
-                      onChange={handleEditChange}
-                      placeholder="Image URL"
-                      style={{ padding: '6px', fontSize: '13px', width: '100%', boxSizing: 'border-box' }}
-                    />
-                    <input 
-                      type="number" 
-                      name="rating" 
-                      min="0"
-                      max="10"
-                      step="0.1"
-                      value={editFormData.rating || ''} 
-                      onChange={handleEditChange}
-                      placeholder="Rating (0-10)"
-                      style={{ padding: '6px', fontSize: '13px', width: '100%', boxSizing: 'border-box' }}
-                    />
-                    <textarea 
-                      name="description" 
-                      rows="4"
-                      value={editFormData.description || ''} 
-                      onChange={handleEditChange}
-                      style={{ padding: '6px', fontSize: '13px', width: '100%', boxSizing: 'border-box', resize: 'vertical' }}
-                    />
+                  /* Form Inline Editor Layout Configuration */
+                  <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', boxSizing: 'border-box' }}>
+                    <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Editing Title Configuration</h3>
+                    <input type="text" name="title" value={editFormData.title || ''} onChange={handleEditChange} placeholder="Movie Title" required />
+                    <input type="text" name="genre" value={editFormData.genre || ''} onChange={handleEditChange} placeholder="Genre" required />
+                    <input type="text" name="imageUrl" value={editFormData.imageUrl || ''} onChange={handleEditChange} placeholder="Poster Image Link" />
+                    <input type="number" name="rating" min="0" max="10" step="0.1" value={editFormData.rating || ''} onChange={handleEditChange} placeholder="Rating Index (1-10)" required />
+                    <textarea name="description" rows="4" value={editFormData.description || ''} onChange={handleEditChange} placeholder="Short plot synopsis description summary text..." />
+                    
+                    <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '10px' }}>
+                      <button onClick={() => handleUpdate(movie._id)} className="btn-primary" style={{ flex: 1, padding: '10px', background: '#32d74b', color: '#000' }}>💾 Save</button>
+                      <button onClick={cancelEditing} className="btn-primary" style={{ flex: 1, padding: '10px', background: 'var(--border)', color: 'var(--text-h)' }}>❌ Cancel</button>
+                    </div>
                   </div>
                 ) : (
-                  <div>
-                    <h3 style={{ margin: '0 0 10px 0', color: '#1a1a1a' }}>{movie.title}</h3>
-                    <span style={{ background: '#f0f3ff', color: '#2b6cb0', padding: '3px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold' }}>
-                      {movie.genre || 'Uncategorized'}
-                    </span>
-
-                    {movie.imageUrl && (
-                      <div style={{ marginTop: '15px', width: '100%', textAlign: 'center' }}>
-                        <Link to={`/forum/${movie._id}`} style={{ display: 'inline-block', width: '100%', cursor: 'pointer' }}>
-                          <img 
-                            src={movie.imageUrl} 
-                            alt={`${movie.title} poster`} 
-                            style={{ 
-                              width: '100%', 
-                              maxHeight: '320px', 
-                              objectFit: 'contain', 
-                              borderRadius: '6px',
-                              backgroundColor: '#f7fafc'
-                            }} 
-                          />
-                        </Link>
-                      </div>
-                    )}
-
-                    <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.5', marginTop: '15px' }}>
-                      {movie.description || 'No description provided for this title.'}
-                    </p>
-                  </div>
-                )}
-                
-                <div>
-                  {!isEditing && movie.rating && (
-                    <div style={{ marginTop: '20px', borderTop: '1px solid #f0f0f0', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '14px', color: '#718096' }}>Rating:</span>
-                      <strong style={{ color: '#d69e2e' }}>⭐ {movie.rating} / 10</strong>
+                  /* Standard Display Mode Layout */
+                  <>
+                    <div className="movie-poster-wrap">
+                      <Link to={`/forum/${movie._id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
+                        <img 
+                          className="movie-poster" 
+                          src={movie.imageUrl || "https://placehold.co/300x450?text=No+Poster+Available"} 
+                          alt={`${movie.title} poster frame asset`} 
+                        />
+                      </Link>
                     </div>
-                  )}
 
-                  <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
-                    {isEditing ? (
-                      <>
-                        <button
-                          onClick={() => handleUpdate(movie._id)}
-                          style={{
-                            flex: 1,
-                            padding: '8px',
-                            backgroundColor: '#48bb78',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            fontWeight: 'bold'
-                          }}
-                        >
-                          💾 Save
-                        </button>
-                        <button
-                          onClick={cancelEditing}
-                          style={{
-                            flex: 1,
-                            padding: '8px',
-                            backgroundColor: '#a0aec0',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            fontWeight: 'bold'
-                          }}
-                        >
-                          ❌ Cancel
-                        </button>
-                      </>
-                    ) : (
-                      <>
+                    <div className="movie-info">
+                      <div className="movie-meta">
+                        <span>{movie.genre || 'Uncategorized'}</span>
+                        {movie.rating && <span className="movie-rating">★ {movie.rating}</span>}
+                      </div>
+                      
+                      <h2 style={{ fontSize: '20px', margin: '4px 0 8px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {movie.title}
+                      </h2>
+                      
+                      <p className="movie-desc" style={{ marginBottom: '16px' }}>
+                        {movie.description || 'No custom log synopsis writeup details configured for this media item entry yet.'}
+                      </p>
+
+                      {/* Administrative Modification Triggers */}
+                      <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '12px', borderTop: '1px solid var(--border)' }}>
                         <button
                           onClick={() => startEditing(movie)}
+                          className="btn-primary"
                           style={{
                             flex: 1,
-                            padding: '8px',
-                            backgroundColor: '#fff',
-                            color: '#4a5568',
-                            border: '1px solid #cbd5e0',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            fontWeight: 'bold'
+                            padding: '6px 12px',
+                            fontSize: '13px',
+                            background: 'var(--code-bg)',
+                            border: '1px solid var(--border)',
+                            color: 'var(--text-h)'
                           }}
                         >
                           ✏️ Edit
                         </button>
                         <button
                           onClick={() => handleDelete(movie._id, movie.title)}
+                          className="btn-primary"
                           style={{
                             flex: 1,
-                            padding: '8px',
-                            backgroundColor: '#fff',
-                            color: '#e53e3e',
-                            border: '1px solid #fed7d7',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            fontWeight: 'bold'
+                            padding: '6px 12px',
+                            fontSize: '13px',
+                            background: 'rgba(255, 69, 58, 0.1)',
+                            border: '1px solid rgba(255, 69, 58, 0.3)',
+                            color: '#ff453a'
                           }}
                         >
                           🗑️ Delete
                         </button>
-                      </>
-                    )}
-                  </div>
-                </div>
+                      </div>
+                    </div>
+                  </>
+                )}
 
               </div>
             );
