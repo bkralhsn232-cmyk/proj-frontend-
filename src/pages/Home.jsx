@@ -75,9 +75,8 @@ export default function Home() {
   if (error) return <div style={{ maxWidth: '500px', margin: '50px auto' }} className="alert-error">{error}</div>;
 
   return (
-    <div style={{ padding: '40px 24px', textAlign: 'left' }}>
+    <div style={{ width: '100%', padding: '40px 24px', boxSizing: 'border-box', textAlign: 'left' }}>
       
-      {/* Dashboard Header Block */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
         <div style={{ textAlign: 'left' }}>
           <h1 style={{ margin: '0 0 4px 0', fontSize: '38px' }}>Explore Movies</h1>
@@ -88,7 +87,6 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Filter and Search Action Control Bar */}
       <div style={{ 
         display: 'flex', 
         gap: '16px', 
@@ -119,7 +117,6 @@ export default function Home() {
         </select>
       </div>
 
-      {/* Empty State Conditions */}
       {movies.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '60px 20px', background: 'var(--code-bg)', borderRadius: '10px', border: '1px dashed var(--border)' }}>
           <h3 style={{ color: 'var(--text-h)', marginBottom: '8px' }}>Your movie collection database is empty!</h3>
@@ -139,8 +136,7 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        /* The Responsive UI Grid Layer */
-        <div className="movie-grid" style={{ padding: '0', gap: '32px' }}>
+        <div className="movie-grid" style={{ padding: '0', gap: '32px', width: '100%', boxSizing: 'border-box' }}>
           {filteredMovies.map((movie) => {
             const isEditing = editingId === movie._id;
 
@@ -148,7 +144,6 @@ export default function Home() {
               <div key={movie._id} className="movie-card">
                 
                 {isEditing ? (
-                  /* Form Inline Editor Layout Configuration */
                   <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', boxSizing: 'border-box' }}>
                     <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Editing Title Configuration</h3>
                     <input type="text" name="title" value={editFormData.title || ''} onChange={handleEditChange} placeholder="Movie Title" required />
@@ -163,7 +158,6 @@ export default function Home() {
                     </div>
                   </div>
                 ) : (
-                  /* Standard Display Mode Layout */
                   <>
                     <div className="movie-poster-wrap">
                       <Link to={`/forum/${movie._id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
@@ -189,7 +183,6 @@ export default function Home() {
                         {movie.description || 'No custom log synopsis writeup details configured for this media item entry yet.'}
                       </p>
 
-                      {/* Administrative Modification Triggers */}
                       <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '12px', borderTop: '1px solid var(--border)' }}>
                         <button
                           onClick={() => startEditing(movie)}
