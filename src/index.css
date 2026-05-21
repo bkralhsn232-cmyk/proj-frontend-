@@ -4,6 +4,8 @@
   --text-h: #ffffff;
   --border: #2a2a2a;
   --accent: #00ff7f;
+  --accent-bg: rgba(0, 255, 127, 0.1);
+  --accent-border: #00ff7f;
   --code-bg: #1a1a1a;
 }
 
@@ -25,7 +27,6 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg);
 }
 
 .main-content {
@@ -33,16 +34,76 @@ html, body {
   padding: 20px;
 }
 
-h1, h2, h3 {
-  color: var(--text-h);
-}
-
+/* Navbar and General Components */
 .navbar {
   background-color: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 20px 32px;
   display: flex;
   justify-content: space-between;
+}
+
+h1, h2, h3 { color: var(--text-h); }
+
+/* New Component Styles */
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+}
+
+.counter:hover { border-color: var(--accent-border); }
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+#next-steps > div { flex: 1 1 0; padding: 32px; }
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+}
+
+#next-steps ul a {
+  color: var(--text-h);
+  background: var(--code-bg);
+  padding: 6px 12px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+#spacer { height: 88px; border-top: 1px solid var(--border); }
+
+.movie-card {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+}
+
+.movie-poster-wrap {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
 input, textarea, select {
@@ -53,7 +114,4 @@ input, textarea, select {
   border-radius: 6px;
 }
 
-input:focus {
-  border-color: var(--accent);
-  outline: none;
-}
+input:focus { border-color: var(--accent); outline: none; }
