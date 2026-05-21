@@ -257,6 +257,7 @@ input:focus, textarea:focus {
   line-height: 140%;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
