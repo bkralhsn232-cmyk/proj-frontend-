@@ -109,11 +109,6 @@ code {
   background: var(--code-bg);
 }
 
-/* ==========================================================================
-   🚀 NEW MOVIE DASHBOARD COMPONENT CLASSES
-   ========================================================================== */
-
-/* Navbar Layout */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -141,7 +136,6 @@ code {
   color: var(--accent);
 }
 
-/* Base Form Upgrades */
 form {
   display: flex;
   flex-direction: column;
@@ -168,7 +162,6 @@ input:focus, textarea:focus {
   box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
-/* Custom Interactive Buttons */
 .btn-primary {
   padding: 12px 24px;
   background: var(--accent);
@@ -186,7 +179,6 @@ input:focus, textarea:focus {
   filter: brightness(1.1);
 }
 
-/* Responsive Dashboard Movie Grid */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -194,7 +186,6 @@ input:focus, textarea:focus {
   padding: 32px;
 }
 
-/* Sleek Cinema Cards */
 .movie-card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -262,7 +253,6 @@ input:focus, textarea:focus {
   overflow: hidden;
 }
 
-/* Banners */
 .alert-error {
   background: rgba(255, 69, 58, 0.1);
   border: 1px solid rgba(255, 69, 58, 0.4);
