@@ -136,7 +136,7 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        <div className="movie-grid" style={{ padding: '0', gap: '32px', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '32px', width: '100%', boxSizing: 'border-box' }}>
           {filteredMovies.map((movie) => {
             const isEditing = editingId === movie._id;
 
