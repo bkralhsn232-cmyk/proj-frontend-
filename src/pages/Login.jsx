@@ -22,10 +22,15 @@ export default function Login() {
       
       const { user, token } = response.data; 
       
-      // Save flags and the token locally so Render's cross-site cookie restriction is completely bypassed
       localStorage.setItem('isLoggedIn', 'true');
       if (token) {
         localStorage.setItem('token', token);
+      }
+
+      if (user) {
+        localStorage.setItem('role', user.role || 'user');
+        localStorage.setItem('username', user.username || 'Anonymous');
+        localStorage.setItem('userId', user._id || user.id || '');
       }
       
       login(user, token); 
