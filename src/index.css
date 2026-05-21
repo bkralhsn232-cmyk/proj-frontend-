@@ -165,7 +165,7 @@ input:focus, textarea:focus {
 .btn-primary {
   padding: 12px 24px;
   background: var(--accent);
-  color: #fff;
+  color: #090909;
   border: none;
   border-radius: 6px;
   font-size: 15px;
