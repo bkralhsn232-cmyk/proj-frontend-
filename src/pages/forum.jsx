@@ -9,8 +9,8 @@ const Forum = () => {
   const [loading, setLoading] = useState(true);
 
   const currentUsername = localStorage.getItem('username') || 'Anonymous'; 
-  const currentUserRole = localStorage.getItem('role') || 'user'; 
-  const currentUserId = localStorage.getItem('userId') || ''; 
+  const currentUserRole = (localStorage.getItem('role') || 'user').toLowerCase().trim(); 
+  const currentUserId = (localStorage.getItem('userId') || '').trim(); 
 
   useEffect(() => {
     const fetchComments = async () => {
