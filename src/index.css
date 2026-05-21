@@ -1,4 +1,3 @@
-
 :root {
   --bg: #121212;
   --text: #a0a0a0;
@@ -28,6 +27,7 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg);
 }
 
 .main-content {
@@ -35,18 +35,74 @@ html, body {
   padding: 20px;
 }
 
-/* Navbar and General Components */
-.navbar {
-  background-color: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 32px;
-  display: flex;
-  justify-content: space-between;
+h1, h2, h3 { 
+  color: var(--text-h); 
 }
 
-h1, h2, h3 { color: var(--text-h); }
+/* --- Navbar Styles --- */
+.navbar {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
 
-/* New Component Styles */
+.navbar-logo {
+  font-size: 22px; 
+  font-weight: bold; 
+  color: var(--accent); 
+  letter-spacing: 1px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-logo span {
+  color: var(--text-h);
+  margin-right: 5px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--text-h);
+}
+
+.logout-btn {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: #ff4d4d;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: #ff4d4d;
+}
+
+/* --- Component Styles --- */
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -58,7 +114,9 @@ h1, h2, h3 { color: var(--text-h); }
   margin-bottom: 24px;
 }
 
-.counter:hover { border-color: var(--accent-border); }
+.counter:hover { 
+  border-color: var(--accent-border); 
+}
 
 #center {
   display: flex;
@@ -75,7 +133,10 @@ h1, h2, h3 { color: var(--text-h); }
   text-align: left;
 }
 
-#next-steps > div { flex: 1 1 0; padding: 32px; }
+#next-steps > div { 
+  flex: 1 1 0; 
+  padding: 32px; 
+}
 
 #next-steps ul {
   list-style: none;
@@ -93,7 +154,10 @@ h1, h2, h3 { color: var(--text-h); }
   border-radius: 6px;
 }
 
-#spacer { height: 88px; border-top: 1px solid var(--border); }
+#spacer { 
+  height: 88px; 
+  border-top: 1px solid var(--border); 
+}
 
 .movie-card {
   background: var(--code-bg);
@@ -107,6 +171,7 @@ h1, h2, h3 { color: var(--text-h); }
   border-bottom: 1px solid var(--border);
 }
 
+/* --- Form Input Styles --- */
 input, textarea, select {
   background-color: var(--code-bg);
   border: 1px solid var(--border);
@@ -115,4 +180,7 @@ input, textarea, select {
   border-radius: 6px;
 }
 
-input:focus { border-color: var(--accent); outline: none; }
+input:focus { 
+  border-color: var(--accent); 
+  outline: none; 
+}
