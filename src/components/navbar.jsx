@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark';
-  });
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
-
   const navStyle = {
     display: 'flex',
     flexDirection: 'row', 
     flexWrap: 'wrap', 
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 15px'
+    padding: '20px 32px',
+    backgroundColor: 'var(--bg)', // <--- ADD THIS
+    borderBottom: '1px solid var(--border)' // <--- AND THIS
   };
 
   const linkStyle = {
@@ -56,28 +44,6 @@ function Navbar() {
         <Link to="/about" style={linkStyle}>About ℹ️</Link>
         <Link to="/register" style={linkStyle}>Register 📝</Link>
         <Link to="/login" style={linkStyle}>Login 🔐</Link>
-
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          style={{
-            background: 'var(--code-bg)',
-            border: '1px solid var(--border)',
-            color: 'var(--text-h)',
-            padding: '6px 12px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontFamily: 'var(--sans)',
-            fontSize: '14px',
-            fontWeight: '500',
-            marginLeft: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          {isDarkMode ? '☀️ Light' : '🌙 Dark'}
-        </button>
       </div>
     </nav>
   );
