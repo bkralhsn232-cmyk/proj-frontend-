@@ -17,19 +17,19 @@
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
   color: var(--text);
-  background: var(--bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-/* Updated to target a class instead of system preference */
 body.dark-mode {
   --text: #9ca3af;
   --text-h: #f3f4f6;
@@ -41,16 +41,9 @@ body.dark-mode {
   --accent-border: rgba(192, 132, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
   --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-}
-
-body.dark-mode #social .button-icon {
-  filter: invert(1) brightness(2);
-}
-
-body {
-  margin: 0;
+  
   background-color: var(--bg);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--text);
 }
 
 #root {
@@ -91,9 +84,7 @@ h2 {
   }
 }
 
-p {
-  margin: 0;
-}
+p { margin: 0; }
 
 code, .counter {
   font-family: var(--mono);
@@ -118,11 +109,7 @@ code {
   background: var(--bg);
 }
 
-.nav-links {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
+.nav-links { display: flex; gap: 24px; align-items: center; }
 
 .nav-links a {
   color: var(--text);
@@ -132,16 +119,9 @@ code {
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: var(--accent);
-}
+.nav-links a:hover { color: var(--accent); }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: left;
-}
+form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
 
 input, textarea, select {
   width: 100%;
@@ -174,9 +154,7 @@ input:focus, textarea:focus {
   transition: background 0.2s ease;
 }
 
-.btn-primary:hover {
-  filter: brightness(1.1);
-}
+.btn-primary:hover { filter: brightness(1.1); }
 
 .movie-grid {
   display: grid;
@@ -197,10 +175,7 @@ input:focus, textarea:focus {
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.movie-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-border);
-}
+.movie-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
 
 .movie-poster-wrap {
   width: 100%;
@@ -211,19 +186,9 @@ input:focus, textarea:focus {
   border-bottom: 1px solid var(--border);
 }
 
-.movie-poster {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.movie-poster { width: 100%; height: 100%; object-fit: cover; }
 
-.movie-info {
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 8px;
-}
+.movie-info { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; gap: 8px; }
 
 .movie-meta {
   display: flex;
