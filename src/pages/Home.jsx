@@ -141,7 +141,7 @@ export default function Home() {
             const isEditing = editingId === movie._id;
 
             return (
-              <div key={movie._id} className="movie-card">
+              <div key={movie._id} className="movie-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 
                 {isEditing ? (
                   <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', boxSizing: 'border-box' }}>
@@ -159,18 +159,19 @@ export default function Home() {
                   </div>
                 ) : (
                   <>
-                    <div className="movie-poster-wrap">
+                    <div className="movie-poster-wrap" style={{ width: '100%', height: '360px', overflow: 'hidden', position: 'relative', background: 'var(--code-bg)' }}>
                       <Link to={`/forum/${movie._id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
                         <img 
                           className="movie-poster" 
                           src={movie.imageUrl || "https://placehold.co/300x450?text=No+Poster+Available"} 
                           alt={`${movie.title} poster frame asset`} 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         />
                       </Link>
                     </div>
 
-                    <div className="movie-info">
-                      <div className="movie-meta">
+                    <div className="movie-info" style={{ padding: '18px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                      <div className="movie-meta" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                         <span>{movie.genre || 'Uncategorized'}</span>
                         {movie.rating && <span className="movie-rating">★ {movie.rating}</span>}
                       </div>
@@ -179,7 +180,7 @@ export default function Home() {
                         {movie.title}
                       </h2>
                       
-                      <p className="movie-desc" style={{ marginBottom: '16px' }}>
+                      <p className="movie-desc" style={{ marginBottom: '16px', flexGrow: 1 }}>
                         {movie.description || 'No custom log synopsis writeup details configured for this media item entry yet.'}
                       </p>
 
