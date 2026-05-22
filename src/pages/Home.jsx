@@ -85,7 +85,7 @@ export default function Home() {
             width: '40px',
             height: '40px',
             border: '4px solid var(--border, #333)',
-            borderTop: '4px solid #3182ce',
+            borderTop: '4px solid var(--accent)',
             borderRadius: '50%'
           }}
           animate={{ rotate: 360 }}
