@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import axios from 'axios';
+
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: 'easeIn' } }
+};
 
 const Forum = () => {
   const { movieId } = useParams(); 
@@ -63,61 +70,69 @@ const Forum = () => {
   if (loading) return <div style={{ padding: '20px', color: '#fff' }}>Loading forum discussion...</div>;
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', color: '#fff' }}>
-      <Link to="/" style={{ color: '#3182ce', textDecoration: 'none' }}>← Back to Catalog</Link>
-      
-      <h2 style={{ marginTop: '20px' }}>Movie Discussion Board</h2>
-      
-      <form onSubmit={handleSubmit} style={{ marginBottom: '30px', marginTop: '20px' }}>
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Share your thoughts about this movie..."
-          style={{ width: '100%', height: '80px', padding: '10px', borderRadius: '6px', color: '#000' }}
-        />
-        <button type="submit" style={{ marginTop: '10px', padding: '10px 20px', cursor: 'pointer' }}>
-          Post Comment
-        </button>
-      </form>
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ width: '100%' }}
+    >
+      <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', color: '#fff' }}>
+        <Link to="/" style={{ color: '#3182ce', textDecoration: 'none' }}>← Back to Catalog</Link>
+        
+        <h2 style={{ marginTop: '20px' }}>Movie Discussion Board</h2>
+        
+        <form onSubmit={handleSubmit} style={{ marginBottom: '30px', marginTop: '20px' }}>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Share your thoughts about this movie..."
+            style={{ width: '100%', height: '80px', padding: '10px', borderRadius: '6px', color: '#000' }}
+          />
+          <button type="submit" style={{ marginTop: '10px', padding: '10px 20px', cursor: 'pointer' }}>
+            Post Comment
+          </button>
+        </form>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        {comments.length === 0 ? (
-          <p style={{ color: '#a0aec0' }}>No comments posted yet. Start the conversation!</p>
-        ) : (
-          comments.map((comment) => {
-            const canDelete = comment.userId === currentUserId || currentUserRole === 'admin';
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          {comments.length === 0 ? (
+            <p style={{ color: '#a0aec0' }}>No comments posted yet. Start the conversation!</p>
+          ) : (
+            comments.map((comment) => {
+              const canDelete = comment.userId === currentUserId || currentUserRole === 'admin';
 
-            return (
-              <div key={comment._id} style={{ background: '#2d3748', padding: '15px', borderRadius: '6px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                  <strong style={{ color: '#ed64a6' }}>@{comment.username}</strong>
-                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                    <small style={{ color: '#a0aec0' }}>{new Date(comment.createdAt).toLocaleDateString()}</small>
-                    {canDelete && (
-                      <button 
-                        onClick={() => handleDeleteComment(comment._id)}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#e53e3e',
-                          cursor: 'pointer',
-                          fontSize: '13px',
-                          padding: '0 5px',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        🗑️ Delete
-                      </button>
-                    )}
+              return (
+                <div key={comment._id} style={{ background: '#2d3748', padding: '15px', borderRadius: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                    <strong style={{ color: '#ed64a6' }}>@{comment.username}</strong>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <small style={{ color: '#a0aec0' }}>{new Date(comment.createdAt).toLocaleDateString()}</small>
+                      {canDelete && (
+                        <button 
+                          onClick={() => handleDeleteComment(comment._id)}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#e53e3e',
+                            cursor: 'pointer',
+                            fontSize: '13px',
+                            padding: '0 5px',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          🗑️ Delete
+                        </button>
+                      )}
+                    </div>
                   </div>
+                  <p style={{ margin: 0, lineHeight: '1.5' }}>{comment.text}</p>
                 </div>
-                <p style={{ margin: 0, lineHeight: '1.5' }}>{comment.text}</p>
-              </div>
-            );
-          })
-        )}
+              );
+            })
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
