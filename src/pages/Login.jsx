@@ -1,7 +1,14 @@
 import { useState, useContext } from 'react'; 
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext'; 
 import API from '../api/axios';
+
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: 'easeIn' } }
+};
 
 export default function Login() {
   const { login } = useContext(AuthContext); 
@@ -19,7 +26,6 @@ export default function Login() {
     
     try {
       const response = await API.post('/api/auth/login', formData);
-      
       const { user, token } = response.data; 
       
       localStorage.setItem('isLoggedIn', 'true');
@@ -34,7 +40,6 @@ export default function Login() {
       }
       
       login(user, token); 
-      
       setMessage('🎉 Login successful! Redirecting...');
       setTimeout(() => navigate('/'), 1500);
     } catch (err) {
@@ -43,39 +48,47 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', fontFamily: 'sans-serif' }}>
-      <h2>🔐 Account Login</h2>
-      {message && <p style={{ fontWeight: 'bold', color: message.startsWith('🎉') ? 'green' : 'red' }}>{message}</p>}
-      
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px' }}>Email Address:</label>
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            required 
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
-          />
-        </div>
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ width: '100%' }}
+    >
+      <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', fontFamily: 'sans-serif' }}>
+        <h2>🔐 Account Login</h2>
+        {message && <p style={{ fontWeight: 'bold', color: message.startsWith('🎉') ? 'green' : 'red' }}>{message}</p>}
+        
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Email Address:</label>
+            <input 
+              type="email" 
+              name="email" 
+              value={formData.email} 
+              onChange={handleChange} 
+              required 
+              style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
+            />
+          </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px' }}>Password:</label>
-          <input 
-            type="password" 
-            name="password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            required 
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
-          />
-        </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Password:</label>
+            <input 
+              type="password" 
+              name="password" 
+              value={formData.password} 
+              onChange={handleChange} 
+              required 
+              style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', boxSizing: 'border-box' }}
+            />
+          </div>
 
-        <button type="submit" style={{ padding: '10px', background: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-          Log In
-        </button>
-      </form>
-    </div>
+          <button type="submit" style={{ padding: '10px', background: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+            Log In
+          </button>
+        </form>
+      </div>
+    </motion.div>
   );
 }
