@@ -39,7 +39,6 @@ h1, h2, h3 {
   color: var(--text-h); 
 }
 
-/* --- Navbar Styles --- */
 .navbar {
   display: flex;
   flex-direction: row; 
@@ -102,7 +101,6 @@ h1, h2, h3 {
   border-color: #ff4d4d;
 }
 
-/* --- Component Styles --- */
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -171,21 +169,21 @@ h1, h2, h3 {
   border-bottom: 1px solid var(--border);
 }
 
-/* --- Form Input Styles --- */
 input, textarea, select {
   background-color: var(--code-bg);
   border: 1px solid var(--border);
-  color: var(--text-h);
+  color: var(--text-h); 
   padding: 12px;
   border-radius: 6px;
+  font-family: sans-serif;
 }
 
-input:focus { 
+input:focus, textarea:focus, select:focus { 
   border-color: var(--accent); 
   outline: none; 
 }
 
-/* --- Animated Loading Spinner --- */
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -195,7 +193,7 @@ input:focus {
   width: 44px;
   height: 44px;
   border: 4px solid var(--border);
-  border-top: 4px solid var(--accent);
+  border-top: 4px solid var(--accent); 
   border-radius: 50%;
   animation: spin 0.82s linear infinite;
   display: block;
