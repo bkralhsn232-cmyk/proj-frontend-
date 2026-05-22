@@ -184,3 +184,19 @@ input:focus {
   border-color: var(--accent); 
   outline: none; 
 }
+
+/* --- Animated Loading Spinner --- */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner-circle {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 0.82s linear infinite;
+  display: block;
+}
