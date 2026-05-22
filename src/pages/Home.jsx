@@ -77,7 +77,31 @@ export default function Home() {
     return matchesSearch && matchesGenre;
   });
 
-  if (loading) return <h2 style={{ textAlign: 'center', marginTop: '100px', color: 'var(--text-h)' }}>🎬 Loading movie catalog...</h2>;
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '20px' }}>
+        <motion.div
+          style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid var(--border, #333)',
+            borderTop: '4px solid #3182ce',
+            borderRadius: '50%'
+          }}
+          animate={{ rotate: 360 }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 0.8
+          }}
+        />
+        <h3 style={{ color: 'var(--text-h, #fff)', margin: 0, fontSize: '18px', fontWeight: '500' }}>
+          🎬 Loading movie catalog...
+        </h3>
+      </div>
+    );
+  }
+
   if (error) return <div style={{ maxWidth: '500px', margin: '50px auto' }} className="alert-error">{error}</div>;
 
   return (
@@ -180,7 +204,7 @@ export default function Home() {
                     </div>
 
                     <div className="movie-info" style={{ padding: '18px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                      <div className="movie-meta" style={{ display: 'flex', SystemUi: 'space-between', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <div className="movie-meta" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                         <span>{movie.genre || 'Uncategorized'}</span>
                         {movie.rating && <span className="movie-rating">★ {movie.rating}</span>}
                       </div>
