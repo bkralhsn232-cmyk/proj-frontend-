@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import API from '../api/axios';
+
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: 'easeIn' } }
+};
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -8,7 +15,6 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-
   const [editingId, setEditingId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
@@ -75,8 +81,13 @@ export default function Home() {
   if (error) return <div style={{ maxWidth: '500px', margin: '50px auto' }} className="alert-error">{error}</div>;
 
   return (
-    <div style={{ width: '100%', padding: '40px 24px', boxSizing: 'border-box', textAlign: 'left' }}>
-      
+    <motion.div 
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ width: '100%', padding: '40px 24px', boxSizing: 'border-box', textAlign: 'left' }}
+    >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
         <div style={{ textAlign: 'left' }}>
           <h1 style={{ margin: '0 0 4px 0', fontSize: '38px' }}>Explore Movies</h1>
@@ -142,7 +153,6 @@ export default function Home() {
 
             return (
               <div key={movie._id} className="movie-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                
                 {isEditing ? (
                   <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', height: '100%', boxSizing: 'border-box' }}>
                     <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Editing Title Configuration</h3>
@@ -151,7 +161,6 @@ export default function Home() {
                     <input type="text" name="imageUrl" value={editFormData.imageUrl || ''} onChange={handleEditChange} placeholder="Poster Image Link" />
                     <input type="number" name="rating" min="0" max="10" step="0.1" value={editFormData.rating || ''} onChange={handleEditChange} placeholder="Rating Index (1-10)" required />
                     <textarea name="description" rows="4" value={editFormData.description || ''} onChange={handleEditChange} placeholder="Short plot synopsis description summary text..." />
-                    
                     <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '10px' }}>
                       <button onClick={() => handleUpdate(movie._id)} className="btn-primary" style={{ flex: 1, padding: '10px', background: '#32d74b', color: '#000' }}>💾 Save</button>
                       <button onClick={cancelEditing} className="btn-primary" style={{ flex: 1, padding: '10px', background: 'var(--border)', color: 'var(--text-h)' }}>❌ Cancel</button>
@@ -171,7 +180,7 @@ export default function Home() {
                     </div>
 
                     <div className="movie-info" style={{ padding: '18px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                      <div className="movie-meta" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <div className="movie-meta" style={{ display: 'flex', SystemUi: 'space-between', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                         <span>{movie.genre || 'Uncategorized'}</span>
                         {movie.rating && <span className="movie-rating">★ {movie.rating}</span>}
                       </div>
@@ -217,12 +226,11 @@ export default function Home() {
                     </div>
                   </>
                 )}
-
               </div>
             );
           })}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
