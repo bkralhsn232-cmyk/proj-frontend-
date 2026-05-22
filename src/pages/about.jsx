@@ -18,11 +18,13 @@ function About() {
     >
       <div id="center">
         <div style={{ maxWidth: '800px', textAlign: 'center', padding: '0 20px' }}>
-          <span className="counter">v1.0.0 Stable</span>
           <h1 style={{ marginBottom: '16px', fontSize: '2.5rem' }}>About MovieApp</h1>
-          <p style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: '40px' }}>
+          <p style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: '24px' }}>
             Welcome to MovieApp, your decentralized space for aggregating, reviewing, and tracking your favorite cinema. Built with high performance and minimal aesthetics in mind, this platform allows users to explore trending records, add custom collections, and discuss plot twists seamlessly inside dedicated community forums.
           </p>
+          <div style={{ marginBottom: '40px' }}>
+            <span className="counter">v1.0.0 Stable</span>
+          </div>
         </div>
 
         <div id="next-steps" style={{ width: '100%', maxWidth: '1000px' }}>
