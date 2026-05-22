@@ -28,7 +28,7 @@ const Forum = () => {
         );
         setComments(response.data);
       } catch (err) {
-        console.error("Error fetching discussion history:", err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -78,7 +78,7 @@ const Forum = () => {
       style={{ width: '100%' }}
     >
       <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', color: '#fff' }}>
-        <Link to="/" style={{ color: '#3182ce', textDecoration: 'none' }}>← Back to Catalog</Link>
+        <Link to="/" style={{ color: 'var(--accent)', textDecoration: 'none' }}>← Back to Catalog</Link>
         
         <h2 style={{ marginTop: '20px' }}>Movie Discussion Board</h2>
         
@@ -87,9 +87,30 @@ const Forum = () => {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Share your thoughts about this movie..."
-            style={{ width: '100%', height: '80px', padding: '10px', borderRadius: '6px', color: '#000' }}
+            style={{ 
+              width: '100%', 
+              height: '80px', 
+              padding: '10px', 
+              borderRadius: '6px', 
+              backgroundColor: 'var(--code-bg)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-h)', 
+              fontFamily: 'sans-serif'
+            }}
           />
-          <button type="submit" style={{ marginTop: '10px', padding: '10px 20px', cursor: 'pointer' }}>
+          <button 
+            type="submit" 
+            className="btn-primary"
+            style={{ 
+              marginTop: '10px', 
+              padding: '10px 20px', 
+              cursor: 'pointer',
+              background: 'var(--code-bg)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-h)',
+              borderRadius: '6px'
+            }}
+          >
             Post Comment
           </button>
         </form>
@@ -102,9 +123,9 @@ const Forum = () => {
               const canDelete = comment.userId === currentUserId || currentUserRole === 'admin';
 
               return (
-                <div key={comment._id} style={{ background: '#2d3748', padding: '15px', borderRadius: '6px' }}>
+                <div key={comment._id} style={{ background: '#1a1a1a', padding: '15px', borderRadius: '6px', border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                    <strong style={{ color: '#ed64a6' }}>@{comment.username}</strong>
+                    <strong style={{ color: 'var(--accent)' }}>@{comment.username}</strong>
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                       <small style={{ color: '#a0aec0' }}>{new Date(comment.createdAt).toLocaleDateString()}</small>
                       {canDelete && (
@@ -113,7 +134,7 @@ const Forum = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: '#e53e3e',
+                            color: '#ff4d4d',
                             cursor: 'pointer',
                             fontSize: '13px',
                             padding: '0 5px',
@@ -125,7 +146,7 @@ const Forum = () => {
                       )}
                     </div>
                   </div>
-                  <p style={{ margin: 0, lineHeight: '1.5' }}>{comment.text}</p>
+                  <p style={{ margin: 0, lineHeight: '1.5', color: 'var(--text-h)' }}>{comment.text}</p>
                 </div>
               );
             })
